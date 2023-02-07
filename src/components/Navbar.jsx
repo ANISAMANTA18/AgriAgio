@@ -3,8 +3,6 @@ import { Search, ShoppingCartOutlined } from "@material-ui/icons";
 import React from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
 const Container = styled.div`
   height: 60px;
@@ -75,14 +73,13 @@ const MenuItem = styled.div`
 `;
 
 const Navbar = () => {
-  const quantity = useSelector(state=>state.cart.quantity)
   return (
     <Container>
       <Wrapper>
         <Left>
-          <Language style={{color: "white"}}>EN</Language>
+          <Language style={{color:"white"}}>EN</Language>
           <SearchContainer>
-            <Input placeholder="Search Products " />
+            <Input placeholder="Search" />
             <Search style={{ color: "gray", fontSize: 16 }} />
           </SearchContainer>
         </Left>
@@ -90,23 +87,16 @@ const Navbar = () => {
           <Logo>AgriAgio.</Logo>
         </Center>
         <Right>
-          <Link to="/register">
-          <MenuItem style={{color: "white"}}>REGISTER</MenuItem>
-          </Link>
-          <Link to="/login">
-          <MenuItem style={{color: "white"}}>SIGN IN</MenuItem>
-          </Link>
-          <Link to="/cart">
+          <MenuItem style={{color:"white"}}>REGISTER</MenuItem>
+          <MenuItem style={{color:"white"}}>SIGN IN</MenuItem>
           <MenuItem>
-            <Badge badgeContent={quantity} color="primary">
+            <Badge badgeContent={4} color="primary">
               <ShoppingCartOutlined />
             </Badge>
           </MenuItem>
-          </Link>
         </Right>
       </Wrapper>
     </Container>
   );
-};
-
+}; 
 export default Navbar;
