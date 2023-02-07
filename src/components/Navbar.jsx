@@ -1,6 +1,7 @@
 import { Badge } from "@material-ui/core";
 import { Search, ShoppingCartOutlined } from "@material-ui/icons";
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 
@@ -87,13 +88,19 @@ const Navbar = () => {
           <Logo>AgriAgio.</Logo>
         </Center>
         <Right>
+          <Link to="/register">
           <MenuItem style={{color:"white"}}>REGISTER</MenuItem>
+          </Link>
+          <Link to="/login">
           <MenuItem style={{color:"white"}}>SIGN IN</MenuItem>
+          </Link>
+          <Link to="/cart">
           <MenuItem>
             <Badge badgeContent={4} color="primary">
               <ShoppingCartOutlined />
             </Badge>
           </MenuItem>
+          </Link>
         </Right>
       </Wrapper>
     </Container>
