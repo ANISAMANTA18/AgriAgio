@@ -5,6 +5,10 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
 import { mobile } from "../responsive";
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
+import { useEffect } from "react";
 
 const Container = styled.div``;
 
@@ -19,7 +23,7 @@ const ImgContainer = styled.div`
 `;
 
 const Image = styled.img`
-  width: 100%;
+  width: 60%;
   height: 90vh;
   object-fit: cover;
   ${mobile({ height: "40vh" })}
@@ -116,20 +120,39 @@ const Button = styled.button`
 `;
 
 const Product = () => {
+  const location = useLocation();
+  const cat = location.pathname.split("/")[2];
+  const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
+
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/v1/api/products/" + cat);
+        setProduct(res.data);
+      } catch (err) {}
+    };
+    getProduct();
+  }, [cat]);
+
+  console.log(product);
   return (
     <Container>
       <Navbar />
       <Announcement />
       <Wrapper>
         <ImgContainer>
-          <Image src="https://i.ibb.co/rfQXPWD/organic-wild-seed-bag-mockup-transparent-plastic-poly-bag-mockup-475259-1290.jpg" />
+          <Image src={product.image} />
         </ImgContainer>
         <InfoContainer>
-          <Title>7 in 1 raw mix Seeds</Title>
+          <Title>{product.product_name}</Title>
           <Desc>
-          7 in 1 raw seed refers to a blend of 7 different types of seeds, typically a combination of various types of nuts, seeds, and grains that are eaten raw. This type of seed mix is a convenient and nutritious way to add variety to your diet, providing a variety of essential vitamins, minerals, and healthy fats. The 7 in 1 raw seed mix is usually sold as a snack, but it can also be used as a topping for yogurt, oatmeal, or salads. It is a great source of protein, fiber, and antioxidants, making it a healthy and tasty addition to any meal. The product page should provide information on the ingredients included in the 7 in 1 raw seed mix and highlight its health benefits.e.
+            { product.desc  }
           </Desc>
-          <Price>Rs 210</Price>
+          <Price>
+            {/* First value of price array */}
+            Rs. {product.price}
+          </Price>
           <FilterContainer>
             <Filter>
               <FilterTitle>Quality</FilterTitle>

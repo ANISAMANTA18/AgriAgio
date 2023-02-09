@@ -1,5 +1,9 @@
+import axios from "axios";
+import { useState } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Container = styled.div`
   width: 100vw;
@@ -55,22 +59,49 @@ const Button = styled.button`
 `;
 
 const Register = () => {
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+    phoneNo: "",
+  });
+
+  const handleInput = (e) => {
+    console.log(e.target.value);
+    setUser({ ...user, [e.target.name]: e.target.value });
+  }
+  const handleClick = (e) => {
+    e.preventDefault();
+    axios.post("http://localhost:5000/v1/api/user/register", user)
+    .then((res) => {
+      toast(
+        'User created successfully',
+      )
+      window.location.href = "/"
+    })
+    .catch((err) => {
+      toast(
+        'Please enter the fields properly',
+      )
+    })  
+
+  }
+
   return (
     <Container>
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
         <Form>
-          <Input placeholder="name" />
-          <Input placeholder="last name" />
-          <Input placeholder="username" />
-          <Input placeholder="email" />
-          <Input placeholder="password" />
-          <Input placeholder="confirm password" />
+          <Input placeholder="Name" name="name" onChange={handleInput}/>
+          <Input placeholder="Email" name="email" onChange={handleInput}/>
+          <Input placeholder="Phone No" name="phoneNo" onChange={handleInput}/>
+          <Input placeholder="Password" name="password" onChange={handleInput} />
           <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
           </Agreement>
-          <Button>CREATE</Button>
+          <Button onClick={handleClick}>CREATE</Button>
+          <ToastContainer />
         </Form>
       </Wrapper>
     </Container>
