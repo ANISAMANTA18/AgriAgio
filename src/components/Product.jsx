@@ -46,7 +46,8 @@ const Circle = styled.div`
 `;
 
 const Image = styled.img`
-  height: 75%;
+  height: 65%;
+  width: auto;
   z-index: 2;
 `;
 
@@ -82,6 +83,10 @@ const Product = ({ item }) => {
           <FavoriteBorderOutlined />
         </Icon>
       </Info>
+      <div style={{ position: "absolute", bottom: 0, left: 0, padding: 10 }}>
+        <h3 style={{ margin: 0,textAlign:"center" }}>{item.name}</h3>
+        <p style={{ margin: 0, fontSize: 12 }}>{item.description}</p>
+      </div>
     </Container>
   );
 };

@@ -33,15 +33,6 @@ const Language = styled.span`
   ${mobile({ display: "none" })}
 `;
 
-const SearchContainer = styled.div`
-  border: 0.5px solid lightgray;
-  display: flex;
-  background-color: white;
-  align-items: center;
-  margin-left: 25px;
-  padding: 5px;
-`;
-
 const Input = styled.input`
   border: none;
   ${mobile({ width: "50px" })}
@@ -79,10 +70,6 @@ const Navbar = () => {
       <Wrapper>
         <Left>
           <Language style={{color:"white"}}>EN</Language>
-          <SearchContainer>
-            <Input placeholder="Search" />
-            <Search style={{ color: "gray", fontSize: 16 }} />
-          </SearchContainer>
         </Left>
         <Center>
           <Logo>

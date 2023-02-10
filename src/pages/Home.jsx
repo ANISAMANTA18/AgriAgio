@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
 import Products from "../components/Products";
+import SearchBar from "../components/SearchBar";
 import Slider from "../components/Slider";
 
 const Home = () => {
@@ -12,6 +13,7 @@ const Home = () => {
     <div>
       <Announcement />
       <Navbar />
+      <SearchBar/>
       <Slider />
       <Categories />
       <Products/>
